@@ -321,11 +321,11 @@
               @click="validar"
               :disabled="!valid"
               type="submit"
-              color="#128D4E"
+              color="#2c3e50"
               class="mr-4 white--text"
               >Cadastrar</v-btn
             >
-            <v-btn @click="limpar" color="#128D4E" class="white--text"
+            <v-btn @click="limpar" color="#2c3e50" class="white--text"
               >Limpar</v-btn
             >
           </v-col>

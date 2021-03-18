@@ -14,7 +14,7 @@
               ></v-text-field>
             </v-col>
             <v-col class="d-flex justify-end">
-              <v-btn color="#128D4E" class="white--text" @click="iniciar">
+              <v-btn color="#2c3e50" class="white--text" @click="iniciar">
                 Recarregar
               </v-btn>
             </v-col>
@@ -319,7 +319,7 @@
                   <v-row justify="center">
                     <v-card-actions>
                       <v-btn
-                        color="#128D4E"
+                        color="#2c3e50"
                         class="white--text"
                         @click="salvarEdicao"
                       >
@@ -342,7 +342,7 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="#128D4E"
+                      color="#2c3e50"
                       class="white--text"
                       @click="deleteItemConfirm"
                     >
