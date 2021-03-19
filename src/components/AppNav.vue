@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-app-bar app clipped-left color="#2c3e50">
+    <v-app-bar app clipped-left color="#199738">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text">
       </v-app-bar-nav-icon>
       <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
       </router-link>
     </v-app-bar>
     <v-navigation-drawer
-      color="#60a3bc"
+      color="#BBFFCC"
       v-model="drawer"
       app
       clipped

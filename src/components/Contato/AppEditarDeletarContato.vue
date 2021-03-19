@@ -14,7 +14,7 @@
               ></v-text-field>
             </v-col>
             <v-col class="d-flex justify-end">
-              <v-btn color="#2c3e50" class="white--text" @click="iniciar">
+              <v-btn color="#79F397" @click="iniciar">
                 Recarregar
               </v-btn>
             </v-col>
@@ -42,12 +42,11 @@
                     >
                     <v-container>
                       <v-row class="mx-5 d-flex justify-center">
-                        <v-col cols="12" md="6" sm="12" xs="12">
-                          <v-select
+                        <v-col cols="12" md="4" sm="12" xs="12">
+                          <v-text-field
                             v-model="info.tipo"
                             label="Tipo"
-                            :items="['CPF', 'CNPJ']"
-                          ></v-select>
+                          ></v-text-field>
 
                           <v-text-field
                             v-model="info.nome"
@@ -65,11 +64,6 @@
                           ></v-text-field>
 
                           <v-text-field
-                            v-model="info.pais"
-                            label="País"
-                          ></v-text-field>
-
-                          <v-text-field
                             label="UF"
                             v-model="info.uf"
                           ></v-text-field>
@@ -78,42 +72,39 @@
                             label="Cidade"
                             v-model="info.cidade"
                           ></v-text-field>
+                        </v-col>
 
+                        <v-col cols="12" md="4" sm="12" xs="12">
+                          <v-text-field
+                            v-model="info.cep"
+                            label="CEP"
+                            v-mask="'#####-###'"
+                          ></v-text-field>
                           <v-text-field
                             v-model="info.endereco"
                             label="Endereço"
                           ></v-text-field>
-                        </v-col>
 
-                        <v-col cols="12" md="6" sm="12" xs="12">
+                          <v-text-field
+                            v-model="info.pais"
+                            label="País"
+                          ></v-text-field>
                           <v-text-field
                             v-model="info.dataNascimento"
-                            label="Data de Nascimento"
+                            label="Dt. de Nascimento / Fundação"
                             v-mask="'##/##/####'"
-                          ></v-text-field>
-
-                          <v-text-field
-                            v-model="info.origem"
-                            label="Origem"
                           ></v-text-field>
 
                           <v-text-field
                             v-model="info.razaoSocial"
                             label="Razão Social"
                           ></v-text-field>
-
-                          <v-select
+                        </v-col>
+                        <v-col cols="12" md="4" sm="12" xs="12">
+                          <v-text-field
                             v-model="info.atividade"
                             label="Atividade"
-                            :items="[
-                              'Consultor',
-                              'Fornecedor',
-                              'Universidade',
-                              'Entidades',
-                              'Produtor',
-                            ]"
-                            @change="mudarSegmento()"
-                          ></v-select>
+                          ></v-text-field>
 
                           <v-text-field
                             v-model="info.segmento"
@@ -134,7 +125,7 @@
                       <v-row class="mx-5 d-flex justify-center">
                         <v-card-text
                           class="d-flex justify-center body-1 font-weight-black"
-                          >Informações da Contato</v-card-text
+                          >Informações de Contato</v-card-text
                         >
                         <v-col cols="12" md="3" sm="12" xs="12">
                           <h4 class="mb-3 text-center">1</h4>
@@ -144,8 +135,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.cargo1"
+                            label="Cargo"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="info.dataAniversario1"
+                            label="Data de Aniversário"
+                            v-mask="'##/##/####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.contato1"
-                            label="Contato"
+                            label="Telefone"
                             v-mask="'(##) ####-####'"
                           ></v-text-field>
 
@@ -156,18 +158,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.whats1"
+                            label="Whatsapp"
+                            v-mask="'(##) ####-####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.email1"
                             label="E-mail"
                           ></v-text-field>
 
                           <v-text-field
-                            v-model="info.cargo1"
-                            label="Cargo"
-                          ></v-text-field>
-
-                          <v-text-field
-                            v-model="info.instagram1"
-                            label="Instagram"
+                            v-model="info.redesSociais1"
+                            label="Redes Sociais"
                           ></v-text-field>
                         </v-col>
 
@@ -179,8 +182,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.cargo2"
+                            label="Cargo"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="info.dataAniversario2"
+                            label="Data de Aniversário"
+                            v-mask="'##/##/####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.contato2"
-                            label="Contato"
+                            label="Telefone"
                             v-mask="'(##) ####-####'"
                           ></v-text-field>
 
@@ -191,18 +205,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.whats2"
+                            label="Whatsapp"
+                            v-mask="'(##) ####-####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.email2"
                             label="E-mail"
                           ></v-text-field>
 
                           <v-text-field
-                            v-model="info.cargo2"
-                            label="Cargo"
-                          ></v-text-field>
-
-                          <v-text-field
-                            v-model="info.instagram2"
-                            label="Instagram"
+                            v-model="info.redesSociais2"
+                            label="Redes Sociais"
                           ></v-text-field>
                         </v-col>
 
@@ -214,8 +229,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.cargo3"
+                            label="Cargo"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="info.dataAniversario3"
+                            label="Data de Aniversário"
+                            v-mask="'##/##/####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.contato3"
-                            label="Contato"
+                            label="Telefone"
                             v-mask="'(##) ####-####'"
                           ></v-text-field>
 
@@ -226,18 +252,19 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.whats3"
+                            label="Whatsapp"
+                            v-mask="'(##) ####-####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.email3"
                             label="E-mail"
                           ></v-text-field>
 
                           <v-text-field
-                            v-model="info.cargo3"
-                            label="Cargo"
-                          ></v-text-field>
-
-                          <v-text-field
-                            v-model="info.instagram3"
-                            label="Instagram"
+                            v-model="info.redesSociais3"
+                            label="Redes Sociais"
                           ></v-text-field>
                         </v-col>
 
@@ -249,8 +276,25 @@
                           ></v-text-field>
 
                           <v-text-field
+                            v-model="info.cargo4"
+                            label="Cargo"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="info.dataAniversario4"
+                            label="Data de Aniversário"
+                            v-mask="'##/##/####'"
+                          ></v-text-field>
+
+                          <v-text-field
                             v-model="info.contato4"
-                            label="Contato"
+                            label="Telefone"
+                            v-mask="'(##) ####-####'"
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="info.whats4"
+                            label="Whatsapp"
                             v-mask="'(##) ####-####'"
                           ></v-text-field>
 
@@ -266,22 +310,17 @@
                           ></v-text-field>
 
                           <v-text-field
-                            v-model="info.cargo4"
-                            label="Cargo"
-                          ></v-text-field>
-
-                          <v-text-field
-                            v-model="info.instagram4"
-                            label="Instagram"
+                            v-model="info.redesSociais4"
+                            label="Redes Sociais"
                           ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row class="mx-5 d-flex justify-center">
                         <v-card-text
                           class="d-flex justify-center body-1 font-weight-black"
-                          >Informações da Registro</v-card-text
+                          >Informações de Registro</v-card-text
                         >
-                        <v-col cols="12" md="6" sm="12" xs="12">
+                        <v-col cols="12" md="4" sm="12" xs="12">
                           <v-text-field
                             v-model="info.datasContato"
                             label="Datas de Contato"
@@ -292,7 +331,7 @@
                             label="Site"
                           ></v-text-field>
                         </v-col>
-                        <v-col cols="12" md="3" sm="12" xs="12">
+                        <v-col cols="12" md="4" sm="12" xs="12">
                           <v-text-field
                             v-model="info.status"
                             label="Status"
@@ -304,7 +343,7 @@
                           ></v-text-field>
                         </v-col>
 
-                        <v-col cols="12" md="3" sm="12" xs="12">
+                        <v-col cols="12" md="4" sm="12" xs="12">
                           <v-textarea
                             v-model="info.registros"
                             label="Considerações e Registros"
@@ -318,14 +357,10 @@
 
                   <v-row justify="center">
                     <v-card-actions>
-                      <v-btn
-                        color="#2c3e50"
-                        class="white--text"
-                        @click="salvarEdicao"
-                      >
+                      <v-btn color="#79F397" @click="salvarEdicao">
                         Salvar
                       </v-btn>
-                      <v-btn color="#c53030" class="white--text" @click="close">
+                      <v-btn color="#FF8585" @click="close">
                         Cancelar
                       </v-btn>
                     </v-card-actions>
@@ -341,11 +376,7 @@
                   </v-row>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn
-                      color="#2c3e50"
-                      class="white--text"
-                      @click="deleteItemConfirm"
-                    >
+                    <v-btn color="#79F397" @click="deleteItemConfirm">
                       OK
                     </v-btn>
                     <v-spacer></v-spacer>
@@ -423,48 +454,56 @@ export default {
         { text: "Excluir", value: "excluir", sortable: false },
       ],
       info: {
-        tipoInteracao: "",
         tipo: "",
         nome: "",
         documento: "",
-        cidade: "",
         uf: "",
+        cidade: "",
+        cep: "",
         endereco: "",
+        pais: "",
         dataNascimento: "",
-        origem: "",
         razaoSocial: "",
-        atividade: "",
+        ativiade: "",
         segmento: "",
         responsavel: "",
         atuacaoMercado: "",
         nomeContato1: "",
-        contato1: "",
+        cargoContato1: "",
+        dataAniversario1: "",
+        telefone1: "",
         celular1: "",
+        whatsapp1: "",
         email1: "",
-        cargo1: "",
-        instagram1: "",
+        redesSociais1: "",
         nomeContato2: "",
-        contato2: "",
+        cargoContato2: "",
+        dataAniversario2: "",
+        telefone2: "",
         celular2: "",
+        whatsapp2: "",
         email2: "",
-        cargo2: "",
-        instagram2: "",
+        redesSociais2: "",
         nomeContato3: "",
-        contato3: "",
+        cargoContato3: "",
+        dataAniversario3: "",
+        telefone3: "",
         celular3: "",
+        whatsapp3: "",
         email3: "",
-        cargo3: "",
-        instagram3: "",
+        redesSociais3: "",
         nomeContato4: "",
-        contato4: "",
+        cargoContato4: "",
+        dataAniversario4: "",
+        telefone4: "",
         celular4: "",
+        whatsapp4: "",
         email4: "",
-        cargo4: "",
-        instagram4: "",
+        redesSociais4: "",
         datasContato: "",
         site: "",
-        interesse: "",
         status: "",
+        interesse: "",
         registros: "",
       },
     };
@@ -501,50 +540,57 @@ export default {
     editItem(item) {
       this.editedIndex = this.contatos.indexOf(item);
       this.info = {
-        tipoInteracao: item.tipo_interacao,
-        tipo: item.tipo_pessoa,
-        nome: item.empresa,
-        documento: item.cpf_cnpj,
-        pais: item.pais,
-        cidade: item.cidade,
+        tipo: item.tipo,
+        nome: item.nome,
+        documento: item.documento,
         uf: item.uf,
+        cidade: item.cidade,
+        cep: item.cep,
         endereco: item.endereco,
+        pais: item.pais,
         dataNascimento: item.data_nascimento,
-        origem: item.origem,
         razaoSocial: item.razao_social,
-        atividade: item.atividade,
+        ativiade: item.atividade,
         segmento: item.segmento,
         responsavel: item.responsavel,
         atuacaoMercado: item.atuacao_mercado,
-        nomeContato1: item.nome_1,
-        contato1: item.contato_1,
+        nomeContato1: item.nome_contato_1,
+        cargoContato1: item.cargo_1,
+        dataAniversario1: item.data_aniversario_1,
+        telefone1: item.telefone_1,
         celular1: item.celular_1,
+        whatsapp1: item.whatsapp_1,
         email1: item.email_1,
-        cargo1: item.cargo_1,
-        instagram1: item.instagram_1,
-        nomeContato2: item.nome_2,
-        contato2: item.contato_2,
+        redesSociais1: item.redes_sociais_1,
+        nomeContato2: item.nome_contato_2,
+        cargoContato2: item.cargo_2,
+        dataAniversario2: item.data_aniversario_2,
+        telefone2: item.telefone_2,
         celular2: item.celular_2,
+        whatsapp2: item.whatsapp_2,
         email2: item.email_2,
-        cargo2: item.cargo_2,
-        instagram2: item.instagram_2,
-        nomeContato3: item.nome_3,
-        contato3: item.contato_3,
+        redesSociais2: item.redes_sociais_2,
+        nomeContato3: item.nome_contato_3,
+        cargoContato3: item.cargo_3,
+        dataAniversario3: item.data_aniversario_3,
+        telefone3: item.telefone_3,
         celular3: item.celular_3,
+        whatsapp3: item.whatsapp_3,
         email3: item.email_3,
-        cargo3: item.cargo_3,
-        instagram3: item.instagram_3,
-        nomeContato4: item.nome_4,
-        contato4: item.contato_4,
+        redesSociais3: item.redes_sociais_3,
+        nomeContato4: item.nome_contato_4,
+        cargoContato4: item.cargo_4,
+        dataAniversario4: item.data_aniversario_4,
+        telefone4: item.telefone_4,
         celular4: item.celular_4,
+        whatsapp4: item.whatsapp_4,
         email4: item.email_4,
-        cargo4: item.cargo_4,
-        instagram4: item.instagram_4,
+        redesSociais4: item.redes_sociais_4,
         datasContato: item.datas_contato,
         site: item.site,
-        interesse: item.interesse,
-        registros: item.consideracoes_registros,
         status: item.status,
+        interesse: item.interesse,
+        registros: item.registros,
       };
       this.dialog = true;
     },
@@ -575,18 +621,19 @@ export default {
 
     async salvarEdicao() {
       const dados = {
-        empresa: this.info.nome
-          ? `${this.caixaAlta(this.info.nome.trim())}`
-          : "",
-        razao_social: this.info.razaoSocial
-          ? `${this.caixaAlta(this.info.razaoSocial.trim())}`
-          : "",
-        cpf_cnpj: this.info.documento,
-        pais: this.info.pais,
+        tipo: this.info.tipo,
+        nome: this.info.nome ? `${this.caixaAlta(this.info.nome.trim())}` : "",
+        documento: this.info.documento,
         uf: this.info.uf,
         cidade: this.info.cidade,
+        cep: this.info.cep,
         endereco: this.info.endereco
           ? `${this.caixaAlta(this.info.endereco.trim())}`
+          : "",
+        pais: this.info.pais,
+        data_nascimento: this.info.dataNascimento,
+        razao_social: this.info.razaoSocial
+          ? `${this.caixaAlta(this.info.razaoSocial.trim())}`
           : "",
         atividade: this.info.atividade
           ? `${this.caixaAlta(this.info.atividade.trim())}`
@@ -594,91 +641,81 @@ export default {
         segmento: this.info.segmento
           ? `${this.caixaAlta(this.info.segmento.trim())}`
           : "",
-        status: this.info.status
-          ? `${this.caixaAlta(this.info.status.trim())}`
+        responsavel: this.info.responsavel
+          ? `${this.caixaAlta(this.info.responsavel.trim())}`
           : "",
-        contato_1: this.info.contato1
-          ? `${this.caixaAlta(this.info.contato1.trim())}`
-          : "",
-        celular_1: this.info.celular1
-          ? `${this.caixaAlta(this.info.celular1.trim())}`
-          : "",
-        email_1: this.info.email1
-          ? `${this.caixaAlta(this.info.email1.trim())}`
-          : "",
-        nome_1: this.info.nome1
-          ? `${this.caixaAlta(this.info.nome1.trim())}`
+        atuacao_mercado: this.info.atuacaoMercado,
+        nome_contato_1: this.info.nomeContato1
+          ? `${this.caixaAlta(this.info.nomeContato1.trim())}`
           : "",
         cargo_1: this.info.cargo1
           ? `${this.caixaAlta(this.info.cargo1.trim())}`
           : "",
-        contato_2: this.info.contato2
-          ? `${this.caixaAlta(this.info.contato2.trim())}`
+        data_aniversario1: this.info.dataAniversario1,
+        telefone_1: this.info.telefone1,
+        celular_1: this.info.celular1,
+        whatsapp_1: this.info.whatsapp1,
+        email_1: this.info.email1
+          ? `${this.caixaAlta(this.info.email1.trim())}`
           : "",
-        celular_2: this.info.celular2
-          ? `${this.caixaAlta(this.info.celular2.trim())}`
-          : "",
-        email_2: this.info.email2
-          ? `${this.caixaAlta(this.info.email2.trim())}`
-          : "",
-        nome_2: this.info.nome2
-          ? `${this.caixaAlta(this.info.nome2.trim())}`
+        redes_sociais1: this.info.redesSociais1
+          ? `${this.caixaAlta(this.info.redesSociais1)}`
+          : this.info.redesSociais1,
+        nome_contato_2: this.info.nomeContato2
+          ? `${this.caixaAlta(this.info.nomeContato2.trim())}`
           : "",
         cargo_2: this.info.cargo2
           ? `${this.caixaAlta(this.info.cargo2.trim())}`
           : "",
-        contato_3: this.info.contato3
-          ? `${this.caixaAlta(this.info.contato3.trim())}`
+        data_aniversario2: this.info.dataAniversario2,
+        telefone_2: this.info.telefone2,
+        celular_2: this.info.celular2,
+        whatsapp_2: this.info.whatsapp2,
+        email_2: this.info.email2
+          ? `${this.caixaAlta(this.info.email2.trim())}`
           : "",
-        celular_3: this.info.celular3
-          ? `${this.caixaAlta(this.info.celular3.trim())}`
-          : "",
-        email_3: this.info.email3
-          ? `${this.caixaAlta(this.info.email3.trim())}`
-          : "",
-        nome_3: this.info.nome3
-          ? `${this.caixaAlta(this.info.nome3.trim())}`
+        redes_sociais2: this.info.redesSociais2
+          ? `${this.caixaAlta(this.info.redesSociais2)}`
+          : this.info.redesSociais2,
+        nome_contato_3: this.info.nomeContato3
+          ? `${this.caixaAlta(this.info.nomeContato3.trim())}`
           : "",
         cargo_3: this.info.cargo3
           ? `${this.caixaAlta(this.info.cargo3.trim())}`
           : "",
-        contato_4: this.info.contato4
-          ? `${this.caixaAlta(this.info.contato4.trim())}`
+        data_aniversario3: this.info.dataAniversario3,
+        telefone_3: this.info.telefone3,
+        celular_3: this.info.celular3,
+        whatsapp_3: this.info.whatsapp3,
+        email_3: this.info.email3
+          ? `${this.caixaAlta(this.info.email3.trim())}`
           : "",
-        celular_4: this.info.celular4
-          ? `${this.caixaAlta(this.info.celular4.trim())}`
-          : "",
-        email_4: this.info.email4
-          ? `${this.caixaAlta(this.info.email4.trim())}`
-          : "",
-        nome_4: this.info.nome4
-          ? `${this.caixaAlta(this.info.nome4.trim())}`
+        redes_sociais3: this.info.redesSociais3
+          ? `${this.caixaAlta(this.info.redesSociais3)}`
+          : this.info.redesSociais3,
+        nome_contato_4: this.info.nomeContato4
+          ? `${this.caixaAlta(this.info.nomeContato4.trim())}`
           : "",
         cargo_4: this.info.cargo4
           ? `${this.caixaAlta(this.info.cargo4.trim())}`
           : "",
-        site: this.info.site ? this.info.site.trim() : "",
-        consideracoes_registros: this.info.registros,
+        data_aniversario4: this.info.dataAniversario4,
+        telefone_4: this.info.telefone4,
+        celular_4: this.info.celular4,
+        whatsapp_4: this.info.whatsapp4,
+        email_4: this.info.email4
+          ? `${this.caixaAlta(this.info.email4.trim())}`
+          : "",
+        redes_sociais4: this.info.redesSociais4
+          ? `${this.caixaAlta(this.info.redesSociais4)}`
+          : this.info.redesSociais4,
         datas_contato: this.info.datasContato,
-        tipo_interacao: this.info.tipoInteracao,
-        tipo_pessoa: this.info.tipo,
-        data_nascimento: this.info.dataNascimento,
-        origem: this.info.origem
-          ? `${this.caixaAlta(this.info.origem.trim())}`
-          : "",
-        responsavel: this.info.responsavel
-          ? `${this.caixaAlta(this.info.responsavel.trim())}`
-          : "",
-        atuacao_mercado: this.info.atuacaoMercado
-          ? `${this.caixaAlta(this.info.atuacaoMercado.trim())}`
-          : "",
-        instagram_1: this.info.instagram1,
-        instagram_2: this.info.instagram2,
-        instagram_3: this.info.instagram3,
-        instagram_4: this.info.instagram4,
+        site: this.info.site ? this.info.site.trim() : "",
+        status: this.info.status,
         interesse: this.info.interesse
           ? `${this.caixaAlta(this.info.interesse.trim())}`
           : "",
+        registros: this.info.registros,
       };
       if (this.editedIndex > -1) {
         await api().put(

@@ -15,15 +15,6 @@
             </h2>
           </v-col>
         </v-row>
-        <v-row class="mx-5 mt-5 d-flex justify-center">
-          <v-col cols="12" md="12" sm="12" xs="12">
-            <v-checkbox
-              v-model="dados.tipoInteracao"
-              label="Contato"
-              value="Contato"
-            ></v-checkbox>
-          </v-col>
-        </v-row>
         <v-row class="mx-5 d-flex justify-center">
           <v-col cols="12" md="4" sm="12" xs="12">
             <v-select
@@ -146,6 +137,12 @@
             <v-text-field v-model="dados.cargo1" label="Cargo"></v-text-field>
 
             <v-text-field
+              v-model="dados.dataAniversario1"
+              label="Data de Aniversário"
+              v-mask="'##/##/####'"
+            ></v-text-field>
+
+            <v-text-field
               v-model="dados.contato1"
               label="Telefone"
               v-mask="'(##) ####-####'"
@@ -179,6 +176,12 @@
             ></v-text-field>
 
             <v-text-field v-model="dados.cargo2" label="Cargo"></v-text-field>
+
+            <v-text-field
+              v-model="dados.dataAniversario2"
+              label="Data de Aniversário"
+              v-mask="'##/##/####'"
+            ></v-text-field>
 
             <v-text-field
               v-model="dados.contato2"
@@ -216,6 +219,12 @@
             <v-text-field v-model="dados.cargo3" label="Cargo"></v-text-field>
 
             <v-text-field
+              v-model="dados.dataAniversario3"
+              label="Data de Aniversário"
+              v-mask="'##/##/####'"
+            ></v-text-field>
+
+            <v-text-field
               v-model="dados.contato3"
               label="Telefone"
               v-mask="'(##) ####-####'"
@@ -249,6 +258,12 @@
             ></v-text-field>
 
             <v-text-field v-model="dados.cargo4" label="Cargo"></v-text-field>
+
+            <v-text-field
+              v-model="dados.dataAniversario4"
+              label="Data de Aniversário"
+              v-mask="'##/##/####'"
+            ></v-text-field>
 
             <v-text-field
               v-model="dados.contato4"
@@ -306,6 +321,14 @@
               label="Interesse"
               :items="infoInteresse"
             ></v-select>
+
+            <v-text-field
+              v-if="this.dados.interesse === 'Outro'"
+              v-model="dados.interesse"
+              label="Digite aqui o seu interesse"
+              required
+              :rules="rules.interesse"
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="4" sm="12" xs="12">
@@ -321,13 +344,11 @@
               @click="validar"
               :disabled="!valid"
               type="submit"
-              color="#2c3e50"
-              class="mr-4 white--text"
+              color="#79F397"
+              class="mr-4"
               >Cadastrar</v-btn
             >
-            <v-btn @click="limpar" color="#2c3e50" class="white--text"
-              >Limpar</v-btn
-            >
+            <v-btn @click="limpar" color="#79F397">Limpar</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -346,46 +367,55 @@ export default {
       desativarSegmento: false,
       desativarUfCidade: false,
       dados: {
-        tipoInteracao: "",
         tipo: "",
         nome: "",
         documento: "",
-        cidade: "",
         uf: "",
-        status: "",
+        cidade: "",
+        cep: "",
         endereco: "",
+        pais: "",
         dataNascimento: "",
         razaoSocial: "",
-        atividade: "",
+        ativiade: "",
         segmento: "",
         responsavel: "",
         atuacaoMercado: "",
         nomeContato1: "",
-        contato1: "",
+        cargoContato1: "",
+        dataAniversario1: "",
+        telefone1: "",
         celular1: "",
+        whatsapp1: "",
         email1: "",
-        cargo1: "",
-        instagram1: "",
+        redesSociais1: "",
         nomeContato2: "",
-        contato2: "",
+        cargoContato2: "",
+        dataAniversario2: "",
+        telefone2: "",
         celular2: "",
+        whatsapp2: "",
         email2: "",
-        cargo2: "",
-        instagram2: "",
+        redesSociais2: "",
         nomeContato3: "",
-        contato3: "",
+        cargoContato3: "",
+        dataAniversario3: "",
+        telefone3: "",
         celular3: "",
+        whatsapp3: "",
         email3: "",
-        cargo3: "",
-        instagram3: "",
+        redesSociais3: "",
         nomeContato4: "",
-        contato4: "",
+        cargoContato4: "",
+        dataAniversario4: "",
+        telefone4: "",
         celular4: "",
+        whatsapp4: "",
         email4: "",
-        cargo4: "",
-        instagram4: "",
+        redesSociais4: "",
         datasContato: "",
         site: "",
+        status: "",
         interesse: "",
         registros: "",
       },
@@ -396,6 +426,9 @@ export default {
         nomeRules: [(nome) => !!nome || "Favor informar o nome!"],
         tipoRules: [(tipo) => !!tipo || "Favor informar o tipo de documento!"],
         docRules: [(documento) => !!documento || "Favor informar o documento!"],
+        interesse: [
+          (interesse) => !!interesse || "Favor informar o interesse!",
+        ],
       },
       itensSegmento: {
         consultor: [
@@ -470,10 +503,6 @@ export default {
   },
 
   methods: {
-    reload() {
-      document.location.reload();
-    },
-
     validar() {
       this.$refs.form.validate();
     },
@@ -505,9 +534,13 @@ export default {
           this.desativarSegmento = false;
           break;
         case "Universidade":
-          return (this.desativarSegmento = true);
+          this.infoSegmento = [];
+          this.desativarSegmento = true;
+          break;
         case "Entidades":
-          return (this.desativarSegmento = true);
+          this.infoSegmento = [];
+          this.desativarSegmento = true;
+          break;
         case "Produtor":
           this.infoSegmento = this.itensSegmento.produtores;
           this.desativarSegmento = false;
@@ -538,18 +571,21 @@ export default {
     async salvarCadastro() {
       try {
         const cadastro = {
-          empresa: this.dados.nome
+          tipo: this.dados.tipo,
+          nome: this.dados.nome
             ? `${this.caixaAlta(this.dados.nome.trim())}`
             : "",
-          razao_social: this.dados.razaoSocial
-            ? `${this.caixaAlta(this.dados.razaoSocial.trim())}`
-            : "",
-          cpf_cnpj: this.dados.documento,
-          pais: this.dados.pais,
+          documento: this.dados.documento,
           uf: this.dados.uf,
           cidade: this.dados.cidade,
+          cep: this.dados.cep,
           endereco: this.dados.endereco
             ? `${this.caixaAlta(this.dados.endereco.trim())}`
+            : "",
+          pais: this.dados.pais,
+          data_nascimento: this.dados.dataNascimento,
+          razao_social: this.dados.razaoSocial
+            ? `${this.caixaAlta(this.dados.razaoSocial.trim())}`
             : "",
           atividade: this.dados.atividade
             ? `${this.caixaAlta(this.dados.atividade.trim())}`
@@ -557,88 +593,81 @@ export default {
           segmento: this.dados.segmento
             ? `${this.caixaAlta(this.dados.segmento.trim())}`
             : "",
-          status: this.dados.status
-            ? `${this.caixaAlta(this.dados.status.trim())}`
+          responsavel: this.dados.responsavel
+            ? `${this.caixaAlta(this.dados.responsavel.trim())}`
             : "",
-          contato_1: this.dados.contato1
-            ? `${this.caixaAlta(this.dados.contato1.trim())}`
-            : "",
-          celular_1: this.dados.celular1
-            ? `${this.caixaAlta(this.dados.celular1.trim())}`
-            : "",
-          email_1: this.dados.email1
-            ? `${this.caixaAlta(this.dados.email1.trim())}`
-            : "",
-          nome_1: this.dados.nomeContato1
+          atuacao_mercado: this.dados.atuacaoMercado,
+          nome_contato_1: this.dados.nomeContato1
             ? `${this.caixaAlta(this.dados.nomeContato1.trim())}`
             : "",
           cargo_1: this.dados.cargo1
             ? `${this.caixaAlta(this.dados.cargo1.trim())}`
             : "",
-          contato_2: this.dados.contato2
-            ? `${this.caixaAlta(this.dados.contato2.trim())}`
+          data_aniversario1: this.dados.dataAniversario1,
+          telefone_1: this.dados.telefone1,
+          celular_1: this.dados.celular1,
+          whatsapp_1: this.dados.whatsapp1,
+          email_1: this.dados.email1
+            ? `${this.caixaAlta(this.dados.email1.trim())}`
             : "",
-          celular_2: this.dados.celular2
-            ? `${this.caixaAlta(this.dados.celular2.trim())}`
-            : "",
-          email_2: this.dados.email2
-            ? `${this.caixaAlta(this.dados.email2.trim())}`
-            : "",
-          nome_2: this.dados.nomeContato2
+          redes_sociais1: this.dados.redesSociais1
+            ? `${this.caixaAlta(this.dados.redesSociais1)}`
+            : this.dados.redesSociais1,
+          nome_contato_2: this.dados.nomeContato2
             ? `${this.caixaAlta(this.dados.nomeContato2.trim())}`
             : "",
           cargo_2: this.dados.cargo2
             ? `${this.caixaAlta(this.dados.cargo2.trim())}`
             : "",
-          contato_3: this.dados.contato3
-            ? `${this.caixaAlta(this.dados.contato3.trim())}`
+          data_aniversario2: this.dados.dataAniversario2,
+          telefone_2: this.dados.telefone2,
+          celular_2: this.dados.celular2,
+          whatsapp_2: this.dados.whatsapp2,
+          email_2: this.dados.email2
+            ? `${this.caixaAlta(this.dados.email2.trim())}`
             : "",
-          celular_3: this.dados.celular3
-            ? `${this.caixaAlta(this.dados.celular3.trim())}`
-            : "",
-          email_3: this.dados.email3
-            ? `${this.caixaAlta(this.dados.email3.trim())}`
-            : "",
-          nome_3: this.dados.nomeContato3
+          redes_sociais2: this.dados.redesSociais2
+            ? `${this.caixaAlta(this.dados.redesSociais2)}`
+            : this.dados.redesSociais2,
+          nome_contato_3: this.dados.nomeContato3
             ? `${this.caixaAlta(this.dados.nomeContato3.trim())}`
             : "",
           cargo_3: this.dados.cargo3
             ? `${this.caixaAlta(this.dados.cargo3.trim())}`
             : "",
-          contato_4: this.dados.contato4
-            ? `${this.caixaAlta(this.dados.contato4.trim())}`
+          data_aniversario3: this.dados.dataAniversario3,
+          telefone_3: this.dados.telefone3,
+          celular_3: this.dados.celular3,
+          whatsapp_3: this.dados.whatsapp3,
+          email_3: this.dados.email3
+            ? `${this.caixaAlta(this.dados.email3.trim())}`
             : "",
-          celular_4: this.dados.celular4
-            ? `${this.caixaAlta(this.dados.celular4.trim())}`
-            : "",
-          email_4: this.dados.email4
-            ? `${this.caixaAlta(this.dados.email4.trim())}`
-            : "",
-          nome_4: this.dados.nomeContato4
+          redes_sociais3: this.dados.redesSociais3
+            ? `${this.caixaAlta(this.dados.redesSociais3)}`
+            : this.dados.redesSociais3,
+          nome_contato_4: this.dados.nomeContato4
             ? `${this.caixaAlta(this.dados.nomeContato4.trim())}`
             : "",
           cargo_4: this.dados.cargo4
             ? `${this.caixaAlta(this.dados.cargo4.trim())}`
             : "",
-          site: this.dados.site ? this.dados.site.trim() : "",
-          consideracoes_registros: this.dados.registros,
+          data_aniversario4: this.dados.dataAniversario4,
+          telefone_4: this.dados.telefone4,
+          celular_4: this.dados.celular4,
+          whatsapp_4: this.dados.whatsapp4,
+          email_4: this.dados.email4
+            ? `${this.caixaAlta(this.dados.email4.trim())}`
+            : "",
+          redes_sociais4: this.dados.redesSociais4
+            ? `${this.caixaAlta(this.dados.redesSociais4)}`
+            : this.dados.redesSociais4,
           datas_contato: this.dados.datasContato,
-          tipo_interacao: this.dados.tipoInteracao,
-          tipo_pessoa: this.dados.tipo,
-          data_nascimento: this.dados.dataNascimento,
-          responsavel: this.dados.responsavel
-            ? `${this.caixaAlta(this.dados.responsavel.trim())}`
-            : "",
-          atuacao_mercado: this.dados.atuacaoMercado
-            ? `${this.caixaAlta(this.dados.atuacaoMercado.trim())}`
-            : "",
-          instagram_1: this.dados.instagram1,
-          instagram_2: this.dados.instagram2,
-          instagram_3: this.dados.instagram3,
-          instagram_4: this.dados.instagram4,
+          site: this.dados.site ? this.dados.site.trim() : "",
+          status: this.dados.status,
           interesse: this.dados.interesse
             ? `${this.caixaAlta(this.dados.interesse.trim())}`
             : "",
+          registros: this.dados.registros,
         };
         await api().post("contatos", cadastro);
         this.$swal({
@@ -668,5 +697,14 @@ export default {
 }
 .link {
   text-decoration: none;
+}
+
+h2,
+h4 {
+  color: #199738;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 </style>

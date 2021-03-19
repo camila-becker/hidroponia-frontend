@@ -80,20 +80,22 @@ export default {
 }
 
 .v-application a {
-  color: #000;
+  color: #199738;
 }
 
 .v-application .primary--text {
-  color: #000 !important;
+  color: #199738 !important;
 }
 
 .font-menu {
   font-size: 1.2rem !important;
   text-transform: uppercase;
+  color: #199738;
 }
 
 .mdi-chevron-down::before {
   margin: 0 !important;
+  color: #199738;
 }
 
 .link {
